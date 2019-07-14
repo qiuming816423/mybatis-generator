@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiuming.mybatisgenerator.mapper.sys.TableMapper" >
+    <resultMap id="tableColumnMap" type="com.qiuming.mybatisgenerator.bean.sys.TableColumn" >
+        <id column="Field" property="columnName" jdbcType="VARCHAR" />
+        <result column="Type" property="dataType" jdbcType="VARCHAR" />
+        <result column="Null" property="nullable" jdbcType="VARCHAR" />
+        <result column="Key" property="key" jdbcType="VARCHAR" />
+        <result column="Default" property="defaultValue" jdbcType="VARCHAR" />
+        <result column="Comment" property="comment" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="getTableColumnList" resultMap="tableColumnMap" parameterType="java.lang.String">
+        show full columns from ${tableName}
+    </select>
+</mapper>
