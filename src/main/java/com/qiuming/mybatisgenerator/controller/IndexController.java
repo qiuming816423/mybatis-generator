@@ -19,7 +19,7 @@ public class IndexController {
         String className = "Area";
         String moduleName = "area";
         String basePath = "D:\\java\\workSpace\\mybatis-generator\\src\\main";
-        String basePackagePath = "com.citiccard.mybatisgenerator";
+        String basePackagePath = "com.qiuming.mybatisgenerator";
         tableService.saveMapping(tableName,className,moduleName,basePath,basePackagePath);
         return "";
     }
