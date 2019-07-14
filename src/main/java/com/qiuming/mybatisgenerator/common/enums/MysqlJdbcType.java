@@ -1,4 +1,4 @@
-package com.qiuming.mybatisgenerator.common.Enum;
+package com.qiuming.mybatisgenerator.common.enums;
 
 public enum MysqlJdbcType {
     VARCHAR("VARCHAR","VARCHAR"),
