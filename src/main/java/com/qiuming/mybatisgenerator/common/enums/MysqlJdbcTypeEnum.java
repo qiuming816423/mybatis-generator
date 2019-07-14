@@ -1,6 +1,6 @@
 package com.qiuming.mybatisgenerator.common.enums;
 
-public enum MysqlJdbcType {
+public enum MysqlJdbcTypeEnum {
     VARCHAR("VARCHAR","VARCHAR"),
     CHAR("CHAR","CHAR"),
     BLOB("BLOB","BLOB"),
@@ -21,13 +21,13 @@ public enum MysqlJdbcType {
 
     private String jdbcType;
 
-    MysqlJdbcType(String mysqlDbType, String jdbcType) {
+    MysqlJdbcTypeEnum(String mysqlDbType, String jdbcType) {
         this.mysqlDbType = mysqlDbType;
         this.jdbcType = jdbcType;
     }
 
     public static String getJdbcTypeByMysqlDbType(String mysqlDbType){
-        for(MysqlJdbcType t : MysqlJdbcType.values()){
+        for(MysqlJdbcTypeEnum t : MysqlJdbcTypeEnum.values()){
             if (t.mysqlDbType.equals(mysqlDbType)) {
                 return t.jdbcType;
             }

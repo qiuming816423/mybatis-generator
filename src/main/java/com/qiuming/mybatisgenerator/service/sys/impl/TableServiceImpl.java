@@ -4,7 +4,7 @@ import com.qiuming.mybatisgenerator.bean.sys.FieldData;
 import com.qiuming.mybatisgenerator.bean.sys.ModelInfo;
 import com.qiuming.mybatisgenerator.bean.sys.TableColumn;
 import com.qiuming.mybatisgenerator.common.enums.MysqlDbTypeJavaTypeEnum;
-import com.qiuming.mybatisgenerator.common.enums.MysqlJdbcType;
+import com.qiuming.mybatisgenerator.common.enums.MysqlJdbcTypeEnum;
 import com.qiuming.mybatisgenerator.common.util.StringUtil;
 import com.qiuming.mybatisgenerator.mapper.sys.TableMapper;
 import com.qiuming.mybatisgenerator.service.sys.ITableService;
@@ -342,7 +342,7 @@ public class TableServiceImpl implements ITableService {
             }
             fieldData.setJavaType(javaType);
             //根据dbType获取mybatisXml对应的jdbcType
-            fieldData.setJdbcType(MysqlJdbcType.getJdbcTypeByMysqlDbType(fieldData.getDbType()));
+            fieldData.setJdbcType(MysqlJdbcTypeEnum.getJdbcTypeByMysqlDbType(fieldData.getDbType()));
             fieldData.setNullable("NO".equals(tableColumn.getNullable()) ? false : true);
             fieldData.setDefaultValue(tableColumn.getDefaultValue());
             fieldData.setComment(tableColumn.getComment());

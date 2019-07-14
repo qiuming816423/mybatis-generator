@@ -20,7 +20,7 @@ public interface ITableService {
      * @param tableName  表名
      * @param className  类名
      * @param moduleName 模块名
-     * @param basePath   基础路径(相对路径)
+     * @param basePath   基础路径(绝对路径)
      * @param basePackagePath 基础包路径
      * @throws Exception
      */
