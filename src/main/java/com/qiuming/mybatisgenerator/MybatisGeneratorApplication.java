@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.citiccard.mybatisgenerator.mapper.*")
+@MapperScan("com.qiuming.mybatisgenerator.mapper.*")
 public class MybatisGeneratorApplication {
 
     public static void main(String[] args) {
