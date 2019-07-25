@@ -63,11 +63,10 @@ public class TableServiceImpl implements ITableService {
     private void processService(ModelInfo modelInfo, String serviceDirPath,String basePackagePath) {
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("package "+basePackagePath+".service."+modelInfo.getModuleName()+";\n\n");
+        stringBuilder.append("package ").append(basePackagePath).append(".service.").append(modelInfo.getModuleName()).append(";\n\n");
         stringBuilder.append("import java.util.List;\n");
-        stringBuilder.append("import "+basePackagePath+".bean."+modelInfo.getModuleName()+"."+modelInfo.getClassName()+";\n");
-        stringBuilder.append("public interface I"+modelInfo.getClassName()+"Service {\n\n");
-        stringBuilder.append("List<"+modelInfo.getClassName()+"> get"+modelInfo.getClassName()+"List();");
+        stringBuilder.append("import ").append(basePackagePath).append(".bean.").append(modelInfo.getModuleName()).append(".").append(modelInfo.getClassName()).append(";\n");
+        stringBuilder.append("public interface I").append(modelInfo.getClassName()).append("Service {\n\n");
         stringBuilder.append("}");
 
         File fileDir = new File(serviceDirPath);
@@ -93,16 +92,16 @@ public class TableServiceImpl implements ITableService {
             }
         }
         StringBuilder serviceImpBuilder = new StringBuilder();
-        serviceImpBuilder.append("package "+basePackagePath+".service."+modelInfo.getModuleName()+".impl;\n\n");
-        serviceImpBuilder.append("import "+basePackagePath+".bean."+modelInfo.getModuleName()+"."+modelInfo.getClassName()+";\n");
-        serviceImpBuilder.append("import "+basePackagePath+".mapper."+modelInfo.getModuleName()+"."+modelInfo.getClassName()+"Mapper;\n");
+        serviceImpBuilder.append("package ").append(basePackagePath).append(".service.").append(modelInfo.getModuleName()).append(".impl;\n\n");
+        serviceImpBuilder.append("import ").append(basePackagePath).append(".bean.").append(modelInfo.getModuleName()).append(".").append(modelInfo.getClassName()).append(";\n");
+        serviceImpBuilder.append("import ").append(basePackagePath).append(".mapper.").append(modelInfo.getModuleName()).append(".").append(modelInfo.getClassName()).append("Mapper;\n");
         serviceImpBuilder.append("import org.springframework.beans.factory.annotation.Autowired;\n");
         serviceImpBuilder.append("import org.springframework.stereotype.Service;\n");
-        serviceImpBuilder.append("import "+basePackagePath+".service."+modelInfo.getModuleName()+".I"+modelInfo.getClassName()+"Service;;\n");
+        serviceImpBuilder.append("import ").append(basePackagePath).append(".service.").append(modelInfo.getModuleName()).append(".I").append(modelInfo.getClassName()).append("Service;;\n");
         serviceImpBuilder.append("@Service\n");
-        serviceImpBuilder.append("public class "+modelInfo.getClassName()+"ServiceImpl implements I"+modelInfo.getClassName()+"Service {\n");
+        serviceImpBuilder.append("public class ").append(modelInfo.getClassName()).append("ServiceImpl implements I").append(modelInfo.getClassName()).append("Service {\n");
         serviceImpBuilder.append("@Autowired\n");
-        serviceImpBuilder.append("private "+modelInfo.getClassName()+"Mapper "+modelInfo.getModuleName()+"Mapper;\n");
+        serviceImpBuilder.append("private ").append(modelInfo.getClassName()).append("Mapper ").append(modelInfo.getModuleName()).append("Mapper;\n");
         serviceImpBuilder.append("}\n");
         String serviceImpDirPath = serviceDirPath + "\\impl";
         File fileImplDir = new File(serviceImpDirPath);
@@ -141,14 +140,18 @@ public class TableServiceImpl implements ITableService {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
         stringBuilder.append("<!DOCTYPE mapper PUBLIC \"-//mybatis.org//DTD Mapper 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-mapper.dtd\" >\n");
-        stringBuilder.append("<mapper namespace=\""+basePackagePath+".mapper."+modelInfo.getModuleName()+"."+modelInfo.getClassName()+"Mapper\" >\n");
-        stringBuilder.append(" <resultMap id=\""+modelInfo.getModuleName()+"Map\" type=\""+basePackagePath+".bean."+modelInfo.getModuleName()+"."+modelInfo.getClassName()+"\" >\n");
+        stringBuilder.append("<mapper namespace=\"").append(basePackagePath).append(".mapper.").append(modelInfo.getModuleName())
+                .append(".").append(modelInfo.getClassName()).append("Mapper\" >\n");
+        stringBuilder.append(" <resultMap id=\"").append(modelInfo.getModuleName()).append("Map\" type=\"").
+                append(basePackagePath).append(".bean.").append(modelInfo.getModuleName()).append(".").append(modelInfo.getClassName()).append("\" >\n");
         for (FieldData fieldData : modelInfo.getFieldDataList()) {
-            stringBuilder.append(" <id column=\""+fieldData.getColumnName()+"\" property=\""+fieldData.getFieldName()+"\" jdbcType=\""+fieldData.getJdbcType()+"\" />\n");
+            stringBuilder.append(" <id column=\"").append(fieldData.getColumnName()).append("\" property=\"").append(fieldData.getFieldName())
+                    .append("\" jdbcType=\"").append(fieldData.getJdbcType()).append("\" />\n");
         }
         stringBuilder.append("</resultMap>\n");
-        stringBuilder.append(" <select id=\"get"+modelInfo.getClassName()+"List\" resultMap=\""+modelInfo.getModuleName()+"Map\">\n");
-        stringBuilder.append("SELECT * from "+modelInfo.getTableName()+"\n");
+        stringBuilder.append(" <select id=\"get").append(modelInfo.getClassName()).append("List\" resultMap=\"").append(modelInfo.
+                getModuleName()).append("Map\">\n");
+        stringBuilder.append("SELECT * from ").append(modelInfo.getTableName()).append("\n");
         stringBuilder.append(" </select>\n");
         stringBuilder.append("</mapper>\n");
 
@@ -190,11 +193,12 @@ public class TableServiceImpl implements ITableService {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("package ").append(packageName).append(";\n\n");
         stringBuilder.append("import org.apache.ibatis.annotations.Mapper;\n");
-        stringBuilder.append("import "+basePackagePath+".bean."+modelInfo.getModuleName()+"."+modelInfo.getClassName()+";\n");
+        stringBuilder.append("import ").append(basePackagePath).append(".bean.").append(modelInfo.getModuleName()).append(".")
+                .append(modelInfo.getClassName()).append(";\n");
         stringBuilder.append("import java.util.List;\n\n");
         stringBuilder.append("@Mapper\n");
-        stringBuilder.append("public interface "+modelInfo.getClassName()+"Mapper {\n\n");
-        stringBuilder.append("List<"+modelInfo.getClassName()+"> get"+modelInfo.getClassName()+"List();\n");
+        stringBuilder.append("public interface ").append(modelInfo.getClassName()).append("Mapper {\n\n");
+        stringBuilder.append("List<").append(modelInfo.getClassName()).append("> get").append(modelInfo.getClassName()).append("List();\n");
         stringBuilder.append("}");
         File fileDir = new File(mapperDirPath);
         if (!fileDir.exists()) {
