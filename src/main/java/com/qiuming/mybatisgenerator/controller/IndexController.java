@@ -18,11 +18,11 @@ public class IndexController {
     @GetMapping(value = "/index")
     public String index() throws Exception {
         //表名
-        String tableName = "area_info";
+        String tableName = "user_info";
         //类名
-        String className = "Area";
+        String className = "User";
         //模块名称
-        String moduleName = "area";
+        String moduleName = "user";
         //基础路径(绝对路径)
         String basePath = "D:\\java\\workSpace\\mybatis-generator\\src\\main";
         //基础包路径

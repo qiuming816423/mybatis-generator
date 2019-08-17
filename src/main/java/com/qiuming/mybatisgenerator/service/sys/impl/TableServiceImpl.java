@@ -40,16 +40,16 @@ public class TableServiceImpl implements ITableService {
         processBean(modelInfo,beanDirPath,basePackagePath);
 
         //生成mapper文件
-        String mapperDirPath = baseJavaPath + "\\" + bathPackageFilePath + "\\mapper\\"+modelInfo.getModuleName();
-        processMapper(modelInfo,mapperDirPath,basePackagePath);
+//        String mapperDirPath = baseJavaPath + "\\" + bathPackageFilePath + "\\mapper\\"+modelInfo.getModuleName();
+//        processMapper(modelInfo,mapperDirPath,basePackagePath);
 
         //生成mapperXml
         String mapperXmlDirPath = basePath+"\\resources\\mapper"+File.separator+modelInfo.getModuleName();
         processMapperXml(modelInfo, mapperXmlDirPath, basePackagePath);
 
         //生成service文件
-        String serviceDirPath = baseJavaPath + "\\" + bathPackageFilePath + "\\service\\"+modelInfo.getModuleName();
-        processService(modelInfo,serviceDirPath,basePackagePath);
+//        String serviceDirPath = baseJavaPath + "\\" + bathPackageFilePath + "\\service\\"+modelInfo.getModuleName();
+//        processService(modelInfo,serviceDirPath,basePackagePath);
 
     }
 
@@ -149,34 +149,91 @@ public class TableServiceImpl implements ITableService {
                     .append("\" jdbcType=\"").append(fieldData.getJdbcType()).append("\" />\n");
         }
         stringBuilder.append("</resultMap>\n");
+
         stringBuilder.append(" <select id=\"get").append(modelInfo.getClassName()).append("List\" resultMap=\"").append(modelInfo.
                 getModuleName()).append("Map\">\n");
         stringBuilder.append("SELECT * from ").append(modelInfo.getTableName()).append("\n");
         stringBuilder.append(" </select>\n");
-        stringBuilder.append("</mapper>\n");
 
-        File fileDir = new File(mapperXmlDirPath);
-        if (!fileDir.exists()) {
-            fileDir.mkdir();
-        }
-        String fileName = "\\"+modelInfo.getModuleName()+"Mapper.xml";
-        File file = new File(mapperXmlDirPath+fileName);
-        if (file.exists()) {
-            fileName ="\\"+modelInfo.getClassName()+"Mapper_bak.xml";
-            file = new File(mapperXmlDirPath+fileName);
-        }
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = new FileOutputStream(file);
-            fileOutputStream.write(stringBuilder.toString().getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                fileOutputStream.close();
-            } catch (IOException e) {
+        stringBuilder.append("<delete id=\"delete"+modelInfo.getClassName()+"\">").append("\n").append("delete from ")
+                .append(modelInfo.getTableName()).append(";\n").append("</delete>");
+
+        stringBuilder.append("<insert id=\"insert").append(modelInfo.getClassName())
+                .append("paramType= \"").append(basePackagePath).append(".bean.").append(modelInfo.getModuleName()).append(".").append(modelInfo.getClassName()).append("\"").append("\">\n")
+                .append("insert into ").append(modelInfo.getTableName()).append("(");
+
+        for (int i = 0; i < modelInfo.getFieldDataList().size(); i++) {
+            FieldData fieldData = modelInfo.getFieldDataList().get(i);
+            if (modelInfo.getFieldDataList().size() == (i + 1)) {
+                stringBuilder.append(fieldData.getColumnName());
+            } else {
+                stringBuilder.append(fieldData.getColumnName()).append(",").append("\n");
             }
         }
+        stringBuilder.append(")").append("\n");
+        stringBuilder.append("values").append("\n");
+        stringBuilder.append("(");
+        for (int i = 0; i < modelInfo.getFieldDataList().size(); i++) {
+            FieldData fieldData = modelInfo.getFieldDataList().get(i);
+            if (modelInfo.getFieldDataList().size() == (i + 1)) {
+                stringBuilder.append(fieldData.getFieldName());
+            } else {
+                stringBuilder.append(fieldData.getFieldName()).append(",").append("\n");
+            }
+        }
+        stringBuilder.append(")");
+        stringBuilder.append("</insert>");
+
+        stringBuilder.append("<insert id=\"batchInsert").append(modelInfo.getClassName())
+                .append("paramType= \"java.util.List\"").append("\">")
+                .append("insert into ").append(modelInfo.getTableName()).append("(");
+        for (int i = 0; i < modelInfo.getFieldDataList().size(); i++) {
+            FieldData fieldData = modelInfo.getFieldDataList().get(i);
+            if (modelInfo.getFieldDataList().size() == (i + 1)) {
+                stringBuilder.append(fieldData.getColumnName());
+            } else {
+                stringBuilder.append(fieldData.getColumnName()).append(",").append("\n");
+            }
+        }
+        stringBuilder.append(")").append("\n");
+        stringBuilder.append("values").append("\n");
+        stringBuilder.append("<forEach item=\"").append(modelInfo.getModuleName()).append("\" collection=\"list\" index=\"index\" separator=\",\">");
+        stringBuilder.append("(");
+        for (int i = 0; i < modelInfo.getFieldDataList().size(); i++) {
+            FieldData fieldData = modelInfo.getFieldDataList().get(i);
+            if (modelInfo.getFieldDataList().size() == (i + 1)) {
+                stringBuilder.append(modelInfo.getModuleName()).append(".").append(fieldData.getFieldName());
+            } else {
+                stringBuilder.append(modelInfo.getModuleName()).append(".").append(fieldData.getFieldName()).append(",").append("\n");
+            }
+        }
+        stringBuilder.append(")");
+        stringBuilder.append("</forEach>");
+        stringBuilder.append("</insert>");
+        stringBuilder.append("</mapper>\n");
+        System.out.println(stringBuilder.toString());
+//        File fileDir = new File(mapperXmlDirPath);
+//        if (!fileDir.exists()) {
+//            fileDir.mkdir();
+//        }
+//        String fileName = "\\"+modelInfo.getModuleName()+"Mapper.xml";
+//        File file = new File(mapperXmlDirPath+fileName);
+//        if (file.exists()) {
+//            fileName ="\\"+modelInfo.getClassName()+"Mapper_bak.xml";
+//            file = new File(mapperXmlDirPath+fileName);
+//        }
+//        FileOutputStream fileOutputStream = null;
+//        try {
+//            fileOutputStream = new FileOutputStream(file);
+//            fileOutputStream.write(stringBuilder.toString().getBytes());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }finally {
+//            try {
+//                fileOutputStream.close();
+//            } catch (IOException e) {
+//            }
+//        }
     }
 
     /**
@@ -269,28 +326,28 @@ public class TableServiceImpl implements ITableService {
         }
         stringBuilder.append("}");
 
-        File fileDir = new File(baseBeanDirPath);
-        if (!fileDir.exists()) {
-            fileDir.mkdir();
-        }
-        String fileName =File.separator+modelInfo.getClassName()+".java";
-        File file = new File(baseBeanDirPath+File.separator+fileName);
-        if (file.exists()) {
-            fileName = File.separator+modelInfo.getClassName() + "_bak.java";
-            file = new File(baseBeanDirPath+File.separator+fileName);
-        }
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = new FileOutputStream(file);
-            fileOutputStream.write(stringBuilder.toString().getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                fileOutputStream.close();
-            } catch (IOException e) {
-            }
-        }
+//        File fileDir = new File(baseBeanDirPath);
+//        if (!fileDir.exists()) {
+//            fileDir.mkdir();
+//        }
+//        String fileName =File.separator+modelInfo.getClassName()+".java";
+//        File file = new File(baseBeanDirPath+File.separator+fileName);
+//        if (file.exists()) {
+//            fileName = File.separator+modelInfo.getClassName() + "_bak.java";
+//            file = new File(baseBeanDirPath+File.separator+fileName);
+//        }
+//        FileOutputStream fileOutputStream = null;
+//        try {
+//            fileOutputStream = new FileOutputStream(file);
+//            fileOutputStream.write(stringBuilder.toString().getBytes());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }finally {
+//            try {
+//                fileOutputStream.close();
+//            } catch (IOException e) {
+//            }
+//        }
     }
 
     /**
