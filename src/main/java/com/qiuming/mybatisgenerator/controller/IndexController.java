@@ -22,7 +22,7 @@ public class IndexController {
         //类名
         String className = "User";
         //模块名称
-        String moduleName = "user1";
+        String moduleName = "user";
         //基础路径(绝对路径)
         String basePath = "D:\\java\\workSpace\\mybatis-generator\\src\\main";
         //基础包路径
