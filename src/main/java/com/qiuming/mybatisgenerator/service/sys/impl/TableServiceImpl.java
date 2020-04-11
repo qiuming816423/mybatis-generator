@@ -40,16 +40,16 @@ public class TableServiceImpl implements ITableService {
         processBean(modelInfo,beanDirPath,basePackagePath);
 
         //生成mapper文件
-//        String mapperDirPath = baseJavaPath + "\\" + bathPackageFilePath + "\\mapper\\"+modelInfo.getModuleName();
-//        processMapper(modelInfo,mapperDirPath,basePackagePath);
+        String mapperDirPath = baseJavaPath + "\\" + bathPackageFilePath + "\\mapper\\"+modelInfo.getModuleName();
+        processMapper(modelInfo,mapperDirPath,basePackagePath);
 
         //生成mapperXml
         String mapperXmlDirPath = basePath+"\\resources\\mapper"+File.separator+modelInfo.getModuleName();
         processMapperXml(modelInfo, mapperXmlDirPath, basePackagePath);
 
         //生成service文件
-//        String serviceDirPath = baseJavaPath + "\\" + bathPackageFilePath + "\\service\\"+modelInfo.getModuleName();
-//        processService(modelInfo,serviceDirPath,basePackagePath);
+        String serviceDirPath = baseJavaPath + "\\" + bathPackageFilePath + "\\service\\"+modelInfo.getModuleName();
+        processService(modelInfo,serviceDirPath,basePackagePath);
 
     }
 
@@ -211,29 +211,28 @@ public class TableServiceImpl implements ITableService {
         stringBuilder.append("</forEach>");
         stringBuilder.append("</insert>");
         stringBuilder.append("</mapper>\n");
-        System.out.println(stringBuilder.toString());
-//        File fileDir = new File(mapperXmlDirPath);
-//        if (!fileDir.exists()) {
-//            fileDir.mkdir();
-//        }
-//        String fileName = "\\"+modelInfo.getModuleName()+"Mapper.xml";
-//        File file = new File(mapperXmlDirPath+fileName);
-//        if (file.exists()) {
-//            fileName ="\\"+modelInfo.getClassName()+"Mapper_bak.xml";
-//            file = new File(mapperXmlDirPath+fileName);
-//        }
-//        FileOutputStream fileOutputStream = null;
-//        try {
-//            fileOutputStream = new FileOutputStream(file);
-//            fileOutputStream.write(stringBuilder.toString().getBytes());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }finally {
-//            try {
-//                fileOutputStream.close();
-//            } catch (IOException e) {
-//            }
-//        }
+        File fileDir = new File(mapperXmlDirPath);
+        if (!fileDir.exists()) {
+            fileDir.mkdir();
+        }
+        String fileName = "\\"+modelInfo.getModuleName()+"Mapper.xml";
+        File file = new File(mapperXmlDirPath+fileName);
+        if (file.exists()) {
+            fileName ="\\"+modelInfo.getClassName()+"Mapper_bak.xml";
+            file = new File(mapperXmlDirPath+fileName);
+        }
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(stringBuilder.toString().getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                fileOutputStream.close();
+            } catch (IOException e) {
+            }
+        }
     }
 
     /**
@@ -326,28 +325,28 @@ public class TableServiceImpl implements ITableService {
         }
         stringBuilder.append("}");
 
-//        File fileDir = new File(baseBeanDirPath);
-//        if (!fileDir.exists()) {
-//            fileDir.mkdir();
-//        }
-//        String fileName =File.separator+modelInfo.getClassName()+".java";
-//        File file = new File(baseBeanDirPath+File.separator+fileName);
-//        if (file.exists()) {
-//            fileName = File.separator+modelInfo.getClassName() + "_bak.java";
-//            file = new File(baseBeanDirPath+File.separator+fileName);
-//        }
-//        FileOutputStream fileOutputStream = null;
-//        try {
-//            fileOutputStream = new FileOutputStream(file);
-//            fileOutputStream.write(stringBuilder.toString().getBytes());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }finally {
-//            try {
-//                fileOutputStream.close();
-//            } catch (IOException e) {
-//            }
-//        }
+        File fileDir = new File(baseBeanDirPath);
+        if (!fileDir.exists()) {
+            fileDir.mkdir();
+        }
+        String fileName =File.separator+modelInfo.getClassName()+".java";
+        File file = new File(baseBeanDirPath+File.separator+fileName);
+        if (file.exists()) {
+            fileName = File.separator+modelInfo.getClassName() + "_bak.java";
+            file = new File(baseBeanDirPath+File.separator+fileName);
+        }
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(stringBuilder.toString().getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                fileOutputStream.close();
+            } catch (IOException e) {
+            }
+        }
     }
 
     /**
@@ -427,5 +426,10 @@ public class TableServiceImpl implements ITableService {
             fmt.append(arr[i].substring(0, 1).toUpperCase() + arr[i].substring(1));
         }
         return fmt.toString();
+    }
+
+    @Override
+    public int add(int a, int b) {
+        return a+b;
     }
 }

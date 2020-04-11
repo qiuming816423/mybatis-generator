@@ -27,4 +27,11 @@ public interface ITableService {
     void saveMapping(String tableName,String className,String moduleName,
                      String basePath,String basePackagePath) throws Exception;
 
+    /**
+     * 两个数相加
+     * @param a
+     * @param b
+     * @return
+     */
+    int add(int a, int b);
 }

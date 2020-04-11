@@ -5,6 +5,7 @@ import com.qiuming.mybatisgenerator.bean.sys.FieldData;
 import com.qiuming.mybatisgenerator.service.sys.ITableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -33,6 +34,7 @@ public class IndexController {
 
     @GetMapping(value = "/index1")
     @ResponseBody
+    @CrossOrigin
     public FieldData index1(){
         FieldData fieldData = new FieldData();
         fieldData.setColumnName("123");
