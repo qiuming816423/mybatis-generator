@@ -82,18 +82,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.1</version>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <includes>
-                        <!-- 指定扫描规则 -->
-                        <include>**/*Test.java</include>
-                    </includes>
-                </configuration>
-                <!-- 经测试版本必须是2.12 -->
-                <version>2.12</version>
-            </plugin>
 
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -101,8 +89,9 @@
                 <version>0.8.0</version>
                 <configuration>
                     <excludes>
-                        <exclude>com/qiuming/mybatisgenerator/bean/*</exclude>
-                        <exclude>com/qiuming/mybatisgenerator/common/*</exclude>
+                        <exclude>**/com/qiuming/mybatisgenerator/bean/sys/*</exclude>
+                        <exclude>**/com/qiuming/mybatisgenerator/common/**</exclude>
+                        <exclude>**/com/qiuming/mybatisgenerator/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
