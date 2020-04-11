@@ -99,6 +99,12 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.0</version>
+                <configuration>
+                    <excludes>
+                        <exclude>com/qiuming/mybatisgenerator/bean/*</exclude>
+                        <exclude>com/qiuming/mybatisgenerator/common/*</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
