@@ -15,23 +15,23 @@ public class IndexController {
     private ITableService tableService;
 
 
-
-    @GetMapping(value = "/index")
-    public String index() throws Exception {
-        //表名
-        String tableName = "user_info";
-        //类名
-        String className = "User";
-        //模块名称
-        String moduleName = "user1";
-        //基础路径(绝对路径)
-        String basePath = "D:\\java\\workSpace\\mybatis-generator\\src\\main";
-        //基础包路径
-        String basePackagePath = "com.qiuming.mybatisgenerator";
-        tableService.saveMapping(tableName,className,moduleName,basePath,basePackagePath);
-        return "";
-    }
-
+//
+//    @GetMapping(value = "/index")
+//    public String index() throws Exception {
+//        //表名
+//        String tableName = "user_info";
+//        //类名
+//        String className = "User";
+//        //模块名称
+//        String moduleName = "user1";
+//        //基础路径(绝对路径)
+//        String basePath = "D:\\java\\workSpace\\mybatis-generator\\src\\main";
+//        //基础包路径
+//        String basePackagePath = "com.qiuming.mybatisgenerator";
+//        tableService.saveMapping(tableName,className,moduleName,basePath,basePackagePath);
+//        return "";
+//    }
+//
     @GetMapping(value = "/index1")
     @ResponseBody
     @CrossOrigin
