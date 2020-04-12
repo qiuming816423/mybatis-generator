@@ -23,9 +23,16 @@ public class TableServiceTest {
     }
 
     @Test
-    public void dec() {
+    public void testDec() {
         int expect = 1;
         int actual = tableService.dec(3, 2);
+        Assert.assertEquals(expect,actual);
+    }
+
+    @Test
+    public void testDec1() {
+        int expect = 6;
+        int actual = tableService.dec(4, 2);
         Assert.assertEquals(expect,actual);
     }
 }
