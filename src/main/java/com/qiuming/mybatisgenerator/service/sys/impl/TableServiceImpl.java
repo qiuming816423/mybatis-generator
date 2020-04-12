@@ -435,6 +435,10 @@ public class TableServiceImpl implements ITableService {
 
     @Override
     public int dec(int a, int b) {
-        return a-b;
+        if (a == 3) {
+            return a - b;
+        } else {
+            return a + b;
+        }
     }
 }
